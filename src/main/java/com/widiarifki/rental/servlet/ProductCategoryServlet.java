@@ -21,12 +21,12 @@ public class ProductCategoryServlet extends HttpServlet {
         Connection con = DBConnectionHandler.getConnection();
         ArrayList<ProductCategory> katProdukData = new ArrayList<ProductCategory>();
 
-		ProductCategory katProduk = new ProductCategory();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
+				ProductCategory katProduk = new ProductCategory();
 				katProduk.setName(rs.getString("name"));
 				katProdukData.add(katProduk);
 			}
