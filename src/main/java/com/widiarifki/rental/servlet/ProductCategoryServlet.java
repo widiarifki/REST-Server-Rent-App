@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*import dbConnection.DBConnectionHandler;*/
 import com.widiarifki.rental.model.ProductCategory;
 import com.widiarifki.rental.connection.DBConnectionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +30,6 @@ public class ProductCategoryServlet extends HttpServlet {
 				katProduk.setName(rs.getString("name"));
 				katProdukData.add(katProduk);
 			}
-			/*return katProdukData;*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,8 +37,6 @@ public class ProductCategoryServlet extends HttpServlet {
 		String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(katProdukData);
 		res.setContentType("application/json");
 		res.getWriter().println(output);
-		/*res.setContentType("text/html");
-		res.getWriter().println(con);*/
 		res.getWriter().flush();
 	}
 }
