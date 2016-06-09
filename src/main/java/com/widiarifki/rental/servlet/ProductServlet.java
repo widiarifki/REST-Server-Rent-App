@@ -9,26 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.widiarifki.rental.model.ProductCategory;
+import com.widiarifki.rental.model.Product;
 import com.widiarifki.rental.connection.DBConnectionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ProductCategoryServlet extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
-        String sql = "SELECT * FROM product_categories";
+        String sql = "SELECT name FROM products";
         Connection con = DBConnectionHandler.getConnection();
-        ArrayList<ProductCategory> katProdukData = new ArrayList<ProductCategory>();
+        ArrayList<Product> katProdukData = new ArrayList<Product>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
-				ProductCategory katProduk = new ProductCategory();
-				System.out.println(rs.getString("id"));
-				katProduk.setId(Integer.parseInt(rs.getString("id")));
+				Product katProduk = new Product();
 				katProduk.setName(rs.getString("name"));
 				katProdukData.add(katProduk);
 			}
