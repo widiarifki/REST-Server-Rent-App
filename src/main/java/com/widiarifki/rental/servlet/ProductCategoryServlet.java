@@ -27,7 +27,6 @@ public class ProductCategoryServlet extends HttpServlet {
 			while(rs.next())
 			{
 				ProductCategory katProduk = new ProductCategory();
-				System.out.println(rs.getString("id"));
 				katProduk.setId(Integer.parseInt(rs.getString("id")));
 				katProduk.setName(rs.getString("name"));
 				katProdukData.add(katProduk);
