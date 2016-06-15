@@ -1,7 +1,6 @@
 package com.widiarifki.rental.model;
 
 public class ProductCategory {
-	
 	private int id;
 	private String name;
 
