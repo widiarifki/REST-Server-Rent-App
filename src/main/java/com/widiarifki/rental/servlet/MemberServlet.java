@@ -17,12 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.widiarifki.rental.connection.DBConnectionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class MemberServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		res.setContentType("application/json");
-		res.getWriter().println("tes");
-		res.getWriter().flush();
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {		
@@ -44,18 +42,22 @@ public class MemberServlet extends HttpServlet {
 			ps.setString(2, email);
 			ps.setString(3, phone);
 			//ps.setString(4, calculateHash(sha1, email));
-			ps.setString(4, "tes");
+			ps.setString(4, DigestUtils.sha1Hex(password));
 			ps.setTimestamp(5, getCurrentTimeStamp());
 
 			ps.executeUpdate();
 
-        } catch (SQLException e) {
-
-        }
-
-        res.setContentType("application/json");
+			res.setContentType("application/json");
 		res.getWriter().println(sql);
 		res.getWriter().flush();
+
+        } catch (SQLException e) {
+        		res.setContentType("application/json");
+		res.getWriter().println(e.getMessage());
+		res.getWriter().flush();
+        }
+
+        
 	}
 
 	private static Timestamp getCurrentTimeStamp() {
