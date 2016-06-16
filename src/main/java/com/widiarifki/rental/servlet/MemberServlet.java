@@ -44,9 +44,9 @@ public class MemberServlet extends HttpServlet {
 			ps.setTimestamp(5, getCurrentTimeStamp());
 
 			ps.executeUpdate();
-
+			System.out.println(sql);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.printStackTrace());
         }
 	}
 
