@@ -1,5 +1,6 @@
 com\widiarifki\rental\connection\DBConnectionHandler.class
+com\widiarifki\rental\model\ProductCategory.class
+com\widiarifki\rental\servlet\MemberServlet.class
 com\widiarifki\rental\servlet\ProductServlet.class
 com\widiarifki\rental\model\Product.class
-com\widiarifki\rental\model\ProductCategory.class
 com\widiarifki\rental\servlet\ProductCategoryServlet.class

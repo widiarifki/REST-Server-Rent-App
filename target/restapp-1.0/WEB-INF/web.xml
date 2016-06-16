@@ -26,6 +26,16 @@
           <url-pattern>/produk</url-pattern>
         </servlet-mapping>
 
+        <servlet>
+          <servlet-name>MemberServlet</servlet-name>
+          <servlet-class>com.widiarifki.rental.servlet.MemberServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+          <servlet-name>MemberServlet</servlet-name>
+          <url-pattern>/member</url-pattern>
+        </servlet-mapping>
+
         <resource-ref>
           <description>Resource reference to a DataSource for managing a connection pool.</description>
           <res-ref-name>jdbc/MySQLDS</res-ref-name>

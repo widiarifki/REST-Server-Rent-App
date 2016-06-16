@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.sql.SQLException;
 import java.util.Formatter;
 import java.util.Date;
 import java.util.ArrayList;
@@ -19,10 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MemberServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json");
+		res.getWriter().println("tes");
+		res.getWriter().flush();
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {		
 		String sql = "INSERT INTO members (name, email, phone, password, date_register) "
 			+" VALUES (?, ?, ?, ?, ?)";
 
@@ -34,20 +37,25 @@ public class MemberServlet extends HttpServlet {
 			String phone = req.getParameter("phone");
 			String password = req.getParameter("password");
 
-			MessageDigest sha1 = MessageDigest.getInstance("SHA1");
+			//MessageDigest sha1 = MessageDigest.getInstance("SHA1");
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, email);
 			ps.setString(3, phone);
-			ps.setString(4, calculateHash(sha1, email));
+			//ps.setString(4, calculateHash(sha1, email));
+			ps.setString(4, "tes");
 			ps.setTimestamp(5, getCurrentTimeStamp());
 
 			ps.executeUpdate();
-			System.out.println(sql);
-        } catch (Exception e) {
-            System.out.println(e.printStackTrace());
+
+        } catch (SQLException e) {
+
         }
+
+        res.setContentType("application/json");
+		res.getWriter().println("tes");
+		res.getWriter().flush();
 	}
 
 	private static Timestamp getCurrentTimeStamp() {
