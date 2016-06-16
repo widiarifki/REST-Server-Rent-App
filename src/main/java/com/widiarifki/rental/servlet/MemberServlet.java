@@ -23,7 +23,7 @@ public class MemberServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {		
 		String sql = "INSERT INTO members (name, email, phone, password, date_register, status) "
-			+" VALUES (?, ?, ?, ?, ?)";
+			+" VALUES (?, ?, ?, ?, ?, ?)";
 
 		Connection con = DBConnectionHandler.getConnection();
 
