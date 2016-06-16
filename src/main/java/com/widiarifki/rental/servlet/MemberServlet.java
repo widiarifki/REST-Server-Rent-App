@@ -36,7 +36,11 @@ public class MemberServlet extends HttpServlet {
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, name);
-			ps.setString(2, email);
+			if(email == ""){
+				ps.setNull(2, java.sql.Types.VARCHAR);
+			}else{
+				ps.setString(2, email);
+			}
 			ps.setString(3, phone);
 			ps.setString(4, DigestUtils.sha1Hex(password));
 			ps.setTimestamp(5, getCurrentTimeStamp());
