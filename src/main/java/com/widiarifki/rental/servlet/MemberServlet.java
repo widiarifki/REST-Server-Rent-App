@@ -2,6 +2,7 @@ package com.widiarifki.rental.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.Object.DigestUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,23 +19,29 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		res.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = res.getWriter();
-		try{
+		
+		String sql = "INSERT INTO members (name, email, phone, password, date_register) "
+			+" VALUES (?, ?, ?, ?, ?)";
 
-			req.getParameter("name");
-			req.getParameter("email");
-			req.getParameter("phone");
-			req.getParameter("password");
+		Connection con = DBConnectionHandler.getConnection();
 
-			String strHtml = String.format(
-				req.getParameter("name")
-			);
+		try {
+			String name = req.getParameter("name");
+			String email = req.getParameter("email");
+			String phone = req.getParameter("phone");
+			String password = req.getParameter("password");
 
-			out.println(strHtml);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, email);
+			ps.setString(3, phone);
+			ps.setString(4, DigestUtils.sha1Hex(password));
+			ps.setTimestamp(5, getCurrentTimeStamp());
 
-		}finally{
-			out.close();
-		}
+			ps.executeUpdate();
+			
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 }
