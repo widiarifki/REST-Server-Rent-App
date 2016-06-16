@@ -59,7 +59,6 @@ public class MemberServlet extends HttpServlet {
 			res.getWriter().flush();
         }
 
-        
 	}
 
 	private static Timestamp getCurrentTimeStamp() {
