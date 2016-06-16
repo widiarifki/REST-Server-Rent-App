@@ -2,10 +2,12 @@ package com.widiarifki.rental.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.Object.DigestUtils;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,17 +33,31 @@ public class MemberServlet extends HttpServlet {
 			String phone = req.getParameter("phone");
 			String password = req.getParameter("password");
 
+			MessageDigest sha1 = MessageDigest.getInstance("SHA1");
+
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, email);
 			ps.setString(3, phone);
-			ps.setString(4, DigestUtils.sha1Hex(password));
+			ps.setString(4, calculateHash(sha1, email));
 			ps.setTimestamp(5, getCurrentTimeStamp());
 
 			ps.executeUpdate();
-			
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 	}
+
+	private static Timestamp getCurrentTimeStamp() {
+		Date today = new Date();
+		return new Timestamp(today.getTime());
+	}
+
+	public static String calculateHash(MessageDigest algorithm, String message) throws Exception{
+		algorithm.update(message.getBytes());
+		byte[] hash = algorithm.digest();
+		return byteArray2Hex(hash);
+    }
+
 }
