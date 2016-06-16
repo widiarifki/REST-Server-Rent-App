@@ -27,7 +27,7 @@ public class MemberServlet extends HttpServlet {
 			req.getParameter("password");
 
 			String strHtml = String.format(
-				req.getParameter("name");
+				req.getParameter("name")
 			);
 
 			out.println(strHtml);
