@@ -17,8 +17,8 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		res.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = res.getWriter();
 		try{
 
 			req.getParameter("name");
