@@ -6,7 +6,8 @@ import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.sql.Timestamp;i
+import java.util.Formatter;
 import java.util.Date;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServlet;
@@ -60,4 +61,11 @@ public class MemberServlet extends HttpServlet {
 		return byteArray2Hex(hash);
     }
 
+    private static String byteArray2Hex(byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x", b);
+        }
+        return formatter.toString();
+    }
 }
