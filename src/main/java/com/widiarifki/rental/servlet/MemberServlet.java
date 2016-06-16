@@ -22,8 +22,8 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {		
-		String sql = "INSERT INTO members (name, email, phone, password, date_register, status) "
-			+" VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO members (name, email, phone, password, date_register, status, device_id) "
+			+" VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		Connection con = DBConnectionHandler.getConnection();
 
@@ -32,6 +32,7 @@ public class MemberServlet extends HttpServlet {
 			String email = req.getParameter("email");
 			String phone = req.getParameter("phone");
 			String password = req.getParameter("password");
+			String device_id = req.getParameter("device_id");
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, name);
@@ -40,6 +41,7 @@ public class MemberServlet extends HttpServlet {
 			ps.setString(4, DigestUtils.sha1Hex(password));
 			ps.setTimestamp(5, getCurrentTimeStamp());
 			ps.setInt(6, 1);
+			ps.setString(7, device_id);
 
 			ps.executeUpdate();
 
