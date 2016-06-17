@@ -76,7 +76,6 @@ public class MemberServlet extends HttpServlet {
 			res.getWriter().println(e.getMessage());
 			res.getWriter().flush();
         }
-
 	}
 
 	private static Timestamp getCurrentTimeStamp() {
