@@ -50,9 +50,10 @@ public class MemberServlet extends HttpServlet {
 			ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
+			int inserted_id = 0;
             if(rs.next())
             {
-                int inserted_id = rs.getInt(1);
+                inserted_id = rs.getInt(1);
             }
 
 			res.setContentType("application/json");
