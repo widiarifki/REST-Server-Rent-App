@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.widiarifki.rental.connection.DBConnectionHandler;
+import com.widiarifki.rental.model.Member;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -57,8 +58,18 @@ public class MemberServlet extends HttpServlet {
                 inserted_id = rs.getInt(1);
             }
 
+            Member member = new Member();
+            member.setId(inserted_id);
+            member.setName(name);
+            member.setEmail(email);
+            member.setPhone(phone);
+            member.setDeviceId(device_id);
+
+            ObjectMapper mapper = new ObjectMapper();
+            String output = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(member);
+
 			res.setContentType("application/json");
-			res.getWriter().println(inserted_id+"");
+			res.getWriter().println(output);
 			res.getWriter().flush();
 
         } catch (SQLException e) {
