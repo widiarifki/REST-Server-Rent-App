@@ -49,7 +49,7 @@ public class MemberServlet extends HttpServlet {
 
 			ps.executeUpdate();
 
-			int newId = ps.getGeneratedKeys().next.getInt(1);
+			int newId = ps.getGeneratedKeys().next().getInt(1);
 
 			res.setContentType("application/json");
 			res.getWriter().println(newId);
