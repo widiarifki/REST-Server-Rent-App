@@ -34,7 +34,7 @@ public class MemberServlet extends HttpServlet {
 			String password = req.getParameter("password");
 			String device_id = req.getParameter("device_id");
 
-			PreparedStatement ps = con.prepareStatement(sql);
+			PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, name);
 			if(email == ""){
 				ps.setNull(2, java.sql.Types.VARCHAR);
