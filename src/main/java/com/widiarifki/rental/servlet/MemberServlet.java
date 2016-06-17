@@ -49,8 +49,10 @@ public class MemberServlet extends HttpServlet {
 
 			ps.executeUpdate();
 
+			int newId = ps.getGeneratedKeys().next.getInt(1);
+
 			res.setContentType("application/json");
-			res.getWriter().println(sql);
+			res.getWriter().println(newId);
 			res.getWriter().flush();
 
         } catch (SQLException e) {
