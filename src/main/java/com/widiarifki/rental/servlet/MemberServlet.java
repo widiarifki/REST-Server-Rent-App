@@ -56,7 +56,7 @@ public class MemberServlet extends HttpServlet {
             }
 
 			res.setContentType("application/json");
-			res.getWriter().println(inserted_id);
+			res.getWriter().println(inserted_id+"");
 			res.getWriter().flush();
 
         } catch (SQLException e) {
